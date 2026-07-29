@@ -51,7 +51,7 @@
   --cyan-dark: #007bb0;
   --white: #ffffff;
   --gray-blue: #8aa3bc;
-  --text-body: rgba(255, 255, 255, 0.88);
+  --text-body: rgba(255, 255, 255, 0.95);
 
   --font-display: "Franklin Cond", "Arial Narrow", sans-serif;
   --font-body: "Montserrat", "Segoe UI", sans-serif;
@@ -108,7 +108,7 @@ input, textarea { font-family: inherit; }
 }
 
 .section-title {
-  font-size: clamp(2.6rem, 6.4vw, 7.3rem);
+  font-size: clamp(2.4rem, 8.6vw, 10.4rem);
   line-height: 1.02;
   margin-bottom: 1.75rem;
 }
@@ -117,7 +117,21 @@ input, textarea { font-family: inherit; }
 .talento-text p,
 .aportamos-text p,
 .clientes-text p {
-  font-size: clamp(1rem, 1.15vw, 1.35rem);
+  font-size: clamp(1rem, 1.1vw, 1.3125rem);
+  color: var(--text-body);
+}
+
+/* Márgenes laterales de los apartados de contenido alineados al ratio del PDF de diseño (186px de 1920px = 9.69%) */
+@media (min-width: 600px) {
+  .somos .container,
+  .talento .container,
+  .aportamos .container,
+  .clientes .container,
+  .contacto .container {
+    max-width: 2200px;
+    padding-left: clamp(1.5rem, 9.69vw, 11.63rem);
+    padding-right: clamp(1.5rem, 9.69vw, 11.63rem);
+  }
 }
 
 /* ---------- Header ---------- */
@@ -185,10 +199,23 @@ input, textarea { font-family: inherit; }
 
 /* ---------- Hero ---------- */
 .hero {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100svh;
   min-height: 560px;
   overflow: hidden;
+  z-index: 0;
+}
+.hero-spacer {
+  height: 100svh;
+  min-height: 560px;
+}
+.page-content {
+  position: relative;
+  z-index: 1;
+  background: var(--navy);
 }
 .hero-slides { position: relative; width: 100%; height: 100%; }
 .hero-slide {
@@ -302,7 +329,7 @@ section {
   background-position: center;
   margin-bottom: var(--section-padding);
 }
-.somos-text { max-width: 900px; }
+.somos-text { max-width: none; }
 
 .feature-photo {
   position: relative;
@@ -320,8 +347,8 @@ section {
   justify-content: center;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.8rem, 6vw, 4rem);
-  letter-spacing: 0.05em;
+  font-size: clamp(2rem, 13.2vw, 16rem);
+  letter-spacing: 0.02em;
   color: rgba(255,255,255,0.55);
   text-shadow: 0 2px 12px rgba(0,0,0,0.4);
   text-align: center;
@@ -329,7 +356,7 @@ section {
 }
 
 /* ---------- Talento ---------- */
-.talento-text { max-width: 900px; margin-bottom: 2.5rem; }
+.talento-text { max-width: none; margin-bottom: 2.5rem; }
 
 .team-carousel {
   position: relative;
@@ -437,11 +464,11 @@ section {
 .team-dot.is-active { background: var(--white); }
 
 /* ---------- Aportamos ---------- */
-.aportamos-text { max-width: 900px; }
+.aportamos-text { max-width: none; }
 
 /* ---------- Clientes ---------- */
-.clientes-text { max-width: 900px; margin-bottom: 2.5rem; }
-.clientes-text p:first-child { font-weight: 600; color: var(--white); }
+.clientes-text { max-width: none; margin-bottom: 2.5rem; }
+.clientes-text p:first-child { color: var(--white); }
 
 .clients-carousel { overflow: hidden; }
 .clients-track {
@@ -476,10 +503,10 @@ section {
   display: grid;
   grid-template-columns: minmax(260px, 420px) 1fr;
   gap: 3rem;
-  align-items: stretch;
+  align-items: start;
 }
-.contacto-photo { border-radius: 4px; overflow: hidden; align-self: stretch; min-height: 420px; }
-.contacto-photo img { width: 100%; height: 100%; object-fit: cover; }
+.contacto-photo { border-radius: 4px; overflow: hidden; aspect-ratio: 1.38; }
+.contacto-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .form-field { margin-bottom: 1.4rem; }
 .form-field label {
@@ -551,6 +578,8 @@ section {
 
 /* ---------- Footer ---------- */
 .site-footer {
+  position: relative;
+  z-index: 1;
   background: var(--navy-dark);
   padding: 3rem 0 0;
 }
