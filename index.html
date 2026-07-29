@@ -136,26 +136,52 @@
       </div>
 
       <div class="team-carousel" id="team-carousel">
-        <button class="team-arrow team-arrow--prev" aria-label="Persona anterior" disabled>&#10094;</button>
-
         <div class="team-track">
-          <article class="team-card is-active">
-            <div class="team-photo">
-              <img src="assets/images/sections/team-albert-moix.jpg" alt="Albert Moix, Director General de Dataplanning" loading="lazy">
-            </div>
-            <div class="team-info">
-              <h3>Albert Moix</h3>
-              <p class="team-role">Director General</p>
-              <ul class="team-bio">
-                <li>Licenciado en Publicidad y RRPP (UAB)</li>
-                <li>Máster en comunicación digital (INITEC)</li>
-                <li>28 años de experiencia</li>
-              </ul>
-            </div>
-          </article>
+          <div class="team-track-list" id="team-track-list">
+            <article class="team-card is-active">
+              <div class="team-photo">
+                <img src="assets/images/sections/team-albert-moix.jpg" alt="Albert Moix, Director General de Dataplanning" loading="lazy">
+              </div>
+              <div class="team-info">
+                <h3>Albert Moix</h3>
+                <p class="team-role">Director General</p>
+                <ul class="team-bio">
+                  <li>Licenciado en Publicidad y RRPP (UAB)</li>
+                  <li>Máster en comunicación digital (INITEC)</li>
+                  <li>28 años de experiencia.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="team-card">
+              <div class="team-photo">
+                <img src="assets/images/sections/team-pedro-mateo.jpg" alt="Pedro Mateo, Director de Expansión y Planificación de Dataplanning" loading="lazy">
+              </div>
+              <div class="team-info">
+                <h3>Pedro Mateo</h3>
+                <p class="team-role">Director Expansión y Planificación</p>
+                <ul class="team-bio">
+                  <li>Licenciado en Publicidad y RRPP (Udg)</li>
+                  <li>Comunicación Audiovisual (UOC)</li>
+                  <li>Máster en publicidad digital (Seeway)</li>
+                  <li>18 años de experiencia.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
         </div>
 
-        <button class="team-arrow team-arrow--next" aria-label="Siguiente persona" disabled>&#10095;</button>
+        <button class="team-arrow team-arrow--prev" aria-label="Persona anterior" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="16,3 16,21 5,12"></polygon></svg>
+        </button>
+        <button class="team-arrow team-arrow--next" aria-label="Siguiente persona">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="8,3 8,21 19,12"></polygon></svg>
+        </button>
+
+        <div class="team-dots" id="team-dots">
+          <span class="team-dot is-active"></span>
+          <span class="team-dot"></span>
+        </div>
       </div>
     </div>
 

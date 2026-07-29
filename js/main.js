@@ -64,6 +64,39 @@
 
   if (slides.length > 1) resetTimer();
 
+  /* ---------------- Talento: team carousel ---------------- */
+  var teamTrackList = document.getElementById("team-track-list");
+  if (teamTrackList) {
+    var teamCards = Array.prototype.slice.call(teamTrackList.querySelectorAll(".team-card"));
+    var teamPrev = document.querySelector(".team-arrow--prev");
+    var teamNext = document.querySelector(".team-arrow--next");
+    var teamDots = Array.prototype.slice.call(document.querySelectorAll(".team-dot"));
+    var teamIndex = 0;
+
+    function updateTeamCarousel() {
+      teamTrackList.style.transform = "translateX(-" + teamIndex * 100 + "%)";
+      teamCards.forEach(function (card, i) {
+        card.classList.toggle("is-active", i === teamIndex);
+      });
+      teamDots.forEach(function (dot, i) {
+        dot.classList.toggle("is-active", i === teamIndex);
+      });
+      teamPrev.disabled = teamCards.length < 2;
+      teamNext.disabled = teamCards.length < 2;
+    }
+
+    teamPrev.addEventListener("click", function () {
+      teamIndex = (teamIndex - 1 + teamCards.length) % teamCards.length;
+      updateTeamCarousel();
+    });
+    teamNext.addEventListener("click", function () {
+      teamIndex = (teamIndex + 1) % teamCards.length;
+      updateTeamCarousel();
+    });
+
+    updateTeamCarousel();
+  }
+
   /* ---------------- Clientes: logos carousel ---------------- */
   var clientLogos = [
     ["arquia.png", "Arquia Banca"],
