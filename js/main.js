@@ -97,6 +97,24 @@
     updateTeamCarousel();
   }
 
+  /* ---------------- Fotos destacadas: efecto "pop" al hacer scroll ---------------- */
+  var featurePhotos = Array.prototype.slice.call(
+    document.querySelectorAll(".feature-photo, .team-carousel")
+  );
+  if (featurePhotos.length && "IntersectionObserver" in window) {
+    var photoObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
+    );
+    featurePhotos.forEach(function (photo) { photoObserver.observe(photo); });
+  } else {
+    featurePhotos.forEach(function (photo) { photo.classList.add("is-visible"); });
+  }
+
   /* ---------------- Clientes: logos carousel ---------------- */
   var clientLogos = [
     ["arquia.png", "Arquia Banca"],
