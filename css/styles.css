@@ -101,10 +101,9 @@ input, textarea { font-family: inherit; }
 
 .divider {
   border: none;
-  border-top: 5px solid #0080ba;
-  max-width: var(--container-width);
-  /*margin: 1.5rem auto;*/
-  margin-top: 5rem;
+  border-top: 3px solid #0080ba;
+  width: 100%;
+  margin: 5rem 0 0;
 }
 
 .section-title {
@@ -127,7 +126,9 @@ input, textarea { font-family: inherit; }
   .talento .container,
   .aportamos .container,
   .clientes .container,
-  .contacto .container {
+  .contacto .container,
+  .site-header .container,
+  .site-footer .container {
     max-width: 2200px;
     padding-left: clamp(1.5rem, 9.69vw, 11.63rem);
     padding-right: clamp(1.5rem, 9.69vw, 11.63rem);
@@ -143,9 +144,7 @@ input, textarea { font-family: inherit; }
   transition: background-color 0.35s ease, padding 0.35s ease, box-shadow .35s ease;
 }
 .site-header.is-scrolled {
-  background-color: var(--navy);
   padding: 0.7rem 0;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
 }
 
 .header-inner {
@@ -360,7 +359,7 @@ section {
 
 .team-carousel {
   position: relative;
-  max-width: 900px;
+  width: 100%;
 }
 
 .team-track { overflow: hidden; }
