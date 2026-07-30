@@ -242,17 +242,20 @@ input, textarea { font-family: inherit; }
   position: absolute;
   left: -1%;
   bottom: 0;
-  height: 46%;
+  height: 71%;
+  max-width: 42%;
   width: auto;
   object-fit: contain;
+  object-position: bottom left;
   filter: drop-shadow(0 20px 40px rgba(0,0,0,0.45));
+  transform: scaleX(-1);
   z-index: 1;
 }
 .hero-content { position: relative; z-index: 2; padding-top: 3rem; margin-top: -4vh; }
 .hero-content--shift { padding-left: clamp(0px, 48vw, 660px); }
 .hero-title {
   color: var(--white);
-  font-size: clamp(3.4rem, 10.8vw, 8.4rem);
+  font-size: clamp(3.4rem, 10.5vw, 13rem);
   line-height: 1.03;
   margin-bottom: 1.6rem;
   max-width: 960px;
@@ -265,6 +268,23 @@ input, textarea { font-family: inherit; }
 
 .hero-slide--sagrada .hero-content,
 .hero-slide--colon .hero-content { margin-top: 0; }
+
+/* Encuadre específico del slide de las 2 torres: texto y badge más grandes y desplazados a la izquierda, según el PDF de diseño */
+.hero-slide--barcelona .hero-content--shift { padding-left: clamp(0px, 35vw, 560px); }
+.hero-slide--barcelona .hero-title { max-width: none; }
+.hero-slide--barcelona .anniversary-badge { width: clamp(220px, 26vw, 460px); }
+
+/* Encuadre específico del slide de la Sagrada Família: texto más grande, con interlineado más ajustado y desplazado a la izquierda, según el PDF de diseño */
+.hero-slide--sagrada .hero-title--multiline { font-size: clamp(2.1rem, 6.5vw, 10rem); line-height: 0.84; }
+.hero-slide--sagrada .hero-content--shift { padding-left: clamp(0px, 35.5vw, 570px); }
+.hero-slide--sagrada .anniversary-badge { width: clamp(140px, 16.2vw, 260px); }
+.hero-slide--sagrada { background-size: 125% auto; background-position: 0% 100% !important; }
+
+/* Encuadre específico del slide de Colón: texto más grande, con interlineado más ajustado y desplazado a la izquierda, según el PDF de diseño */
+.hero-slide--colon .hero-title--multiline { font-size: clamp(2.1rem, 6.5vw, 10rem); line-height: 0.84; }
+.hero-slide--colon .hero-content--shift { padding-left: clamp(0px, 35.5vw, 570px); max-width: none; }
+.hero-slide--colon .hero-title { max-width: none; }
+.hero-slide--colon .anniversary-badge { width: clamp(140px, 16.2vw, 260px); }
 
 .anniversary-badge {
   display: block;
@@ -708,10 +728,10 @@ section {
   .main-nav a { font-size: 1.1rem; }
   .nav-toggle { display: flex; z-index: 101; }
 
-  .hero-colon-figure { height: 60%; left: 50%; transform: translateX(-50%); opacity: 0.55; }
+  .hero-colon-figure { height: 60%; left: 50%; transform: translateX(-50%) scaleX(-1); opacity: 0.55; }
   .hero-content { text-align: center; margin: 0 auto; }
   .hero-content--shift { padding-left: 0; }
-  .hero-slide--sagrada { background-position: center !important; }
+  .hero-slide--sagrada { background-size: cover !important; background-position: center !important; }
   .hero-title { margin-left: auto; margin-right: auto; }
   .anniversary-badge { margin-left: auto; margin-right: auto; }
 
