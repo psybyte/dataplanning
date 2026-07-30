@@ -435,6 +435,7 @@ section {
 }
 @media (prefers-reduced-motion: reduce) {
   .team-carousel { transform: none; opacity: 1; }
+  .team-photo, .team-arrow { transform: none; }
 }
 
 .team-track { overflow: hidden; }
@@ -457,9 +458,12 @@ section {
   z-index: 2;
   background: var(--navy-dark);
   box-shadow: 0 8px 14px rgba(0,0,0,0.2);
-  transition: box-shadow 0.9s ease;
+  transform: translateX(clamp(50px, 7vw, 130px));
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.9s ease;
+  will-change: transform;
 }
 .team-carousel.is-visible .team-photo {
+  transform: translateX(0);
   box-shadow:
     0 4px 8px rgba(0,0,0,0.35),
     0 18px 30px rgba(0,0,0,0.45),
@@ -521,8 +525,11 @@ section {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.2s ease, opacity 0.2s ease;
+  transform: translateX(clamp(50px, 7vw, 130px));
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, background-color 0.2s ease, opacity 0.2s ease;
+  will-change: transform;
 }
+.team-carousel.is-visible .team-arrow { transform: translateX(0); }
 .team-arrow:disabled { opacity: 0.35; cursor: default; }
 .team-arrow:not(:disabled):hover { background: var(--navy-dark); }
 .team-arrow svg { width: 32%; height: 32%; fill: var(--white); }
@@ -727,6 +734,7 @@ section {
     max-width: 420px;
     aspect-ratio: 4 / 3;
     margin: 0 auto;
+    transform: none;
   }
   .team-info {
     position: static;
@@ -738,6 +746,7 @@ section {
     position: static;
     width: 42px;
     height: 42px;
+    transform: none;
   }
   .team-arrow--prev { order: 1; }
   .team-dots { position: static; order: 2; }
