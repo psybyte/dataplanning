@@ -127,11 +127,19 @@ input, textarea { font-family: inherit; }
   .aportamos .container,
   .clientes .container,
   .contacto .container,
-  .site-header .container,
   .site-footer .container {
     max-width: 2200px;
     padding-left: clamp(1.25rem, 5vw, 6rem);
     padding-right: clamp(1.25rem, 5vw, 6rem);
+  }
+}
+
+/* Márgenes del navbar superior: iguales a la proporción real del logo y el menú en el PDF de diseño (9.69% del ancho) */
+@media (min-width: 600px) {
+  .site-header .container {
+    max-width: 2200px;
+    padding-left: clamp(1.5rem, 9.69vw, 11.63rem);
+    padding-right: clamp(1.5rem, 9.69vw, 11.63rem);
   }
 }
 
@@ -157,9 +165,9 @@ input, textarea { font-family: inherit; }
 .logo { display: inline-flex; flex-direction: column; line-height: 1; }
 .logo-img { height: clamp(28px, 3.2vw, 38px); width: auto; display: block; }
 
-.main-nav ul { display: flex; gap: 2.2rem; }
+.main-nav ul { display: flex; gap: clamp(1.75rem, 5.94vw, 6.5rem); }
 .main-nav a {
-  font-size: 0.92rem;
+  font-size: clamp(0.85rem, 1.25vw, 1.4rem);
   font-weight: 500;
   color: var(--white);
   position: relative;
