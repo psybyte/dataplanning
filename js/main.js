@@ -168,9 +168,9 @@
 
   function computeGroupSize() {
     var w = window.innerWidth;
-    if (w < 600) return 4;
-    if (w < 1000) return 6;
-    return 10;
+    if (w < 600) return 6;
+    if (w < 1000) return 9;
+    return 18;
   }
 
   function renderGroup() {
