@@ -283,7 +283,24 @@ input, textarea { font-family: inherit; }
 .hero-slide--sagrada .hero-title--multiline { font-size: clamp(2.1rem, 6.5vw, 10rem); line-height: 0.84; }
 .hero-slide--sagrada .hero-content--shift { padding-left: clamp(0px, 35.5vw, 570px); }
 .hero-slide--sagrada .anniversary-badge { width: clamp(140px, 16.2vw, 260px); }
-.hero-slide--sagrada { background-size: 125% auto; background-position: 0% 100% !important; }
+/* El encuadre vertical de la cruz depende de la proporción del viewport (a mayor
+   anchura relativa, la imagen ampliada al 125% queda más "alta" respecto al
+   contenedor), así que se ajusta por tramos de aspect-ratio para que la cruz
+   completa (incluido el remate superior) se vea igual que en el PDF de diseño
+   en las proporciones de pantalla más habituales. */
+.hero-slide--sagrada { background-size: 125% auto; background-position: 0% 120% !important; }
+@media (min-aspect-ratio: 3/2) {
+  .hero-slide--sagrada { background-position: 0% 115% !important; }
+}
+@media (min-aspect-ratio: 8/5) {
+  .hero-slide--sagrada { background-position: 0% 106% !important; }
+}
+@media (min-aspect-ratio: 16/9) {
+  .hero-slide--sagrada { background-position: 0% 90% !important; }
+}
+@media (min-aspect-ratio: 2/1) {
+  .hero-slide--sagrada { background-position: 0% 70% !important; }
+}
 
 /* Encuadre específico del slide de Colón: texto más grande, con interlineado más ajustado y desplazado a la izquierda, según el PDF de diseño */
 .hero-slide--colon .hero-title--multiline { font-size: clamp(2.1rem, 6.5vw, 10rem); line-height: 0.84; }
