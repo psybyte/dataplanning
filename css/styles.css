@@ -108,8 +108,12 @@ input, textarea { font-family: inherit; }
 
 .section-title {
   font-size: clamp(2.4rem, 8.6vw, 10.4rem);
-  line-height: 1.02;
+  line-height: 0.84;
   margin-bottom: 1.75rem;
+  /* La fuente Franklin Cond tiene un pequeño margen de escape (bearing) a la
+     izquierda de sus glifos en mayúsculas; se compensa para que el trazo
+     visible del texto quede a ras con los párrafos y el logo. */
+  margin-left: -0.035em;
 }
 
 .somos-text p,
@@ -121,25 +125,18 @@ input, textarea { font-family: inherit; }
 }
 
 /* Márgenes laterales de los apartados de contenido, ajustados para acercarse a la imagen de referencia del PDF */
+/* El navbar superior comparte el mismo margen para que el logo quede alineado con los títulos y párrafos */
 @media (min-width: 600px) {
   .somos .container,
   .talento .container,
   .aportamos .container,
   .clientes .container,
   .contacto .container,
+  .site-header .container,
   .site-footer .container {
     max-width: 2200px;
     padding-left: clamp(1.25rem, 5vw, 6rem);
     padding-right: clamp(1.25rem, 5vw, 6rem);
-  }
-}
-
-/* Márgenes del navbar superior: iguales a la proporción real del logo y el menú en el PDF de diseño (9.69% del ancho) */
-@media (min-width: 600px) {
-  .site-header .container {
-    max-width: 2200px;
-    padding-left: clamp(1.5rem, 9.69vw, 11.63rem);
-    padding-right: clamp(1.5rem, 9.69vw, 11.63rem);
   }
 }
 
