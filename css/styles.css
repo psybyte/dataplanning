@@ -238,10 +238,10 @@ input, textarea { font-family: inherit; }
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,19,33,0.65) 0%, rgba(0,48,82,0.45) 45%, rgba(0,26,46,0.75) 100%);
+  background: linear-gradient(180deg, rgba(0,19,33,0.25) 0%, rgba(0,48,82,0.15) 45%, rgba(0,26,46,0.35) 100%);
 }
 .hero-slide--colon .hero-overlay {
-  background: linear-gradient(180deg, rgba(0,19,33,0.35) 0%, rgba(0,48,82,0.35) 55%, rgba(0,26,46,0.75) 100%);
+  background: linear-gradient(180deg, rgba(0,19,33,0.12) 0%, rgba(0,48,82,0.12) 55%, rgba(0,26,46,0.3) 100%);
 }
 .hero-colon-figure {
   position: absolute;
