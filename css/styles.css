@@ -124,19 +124,26 @@ input, textarea { font-family: inherit; }
   color: var(--text-body);
 }
 
-/* Márgenes laterales de los apartados de contenido, ajustados para acercarse a la imagen de referencia del PDF */
-/* El navbar superior comparte el mismo margen para que el logo quede alineado con los títulos y párrafos */
+/* Márgenes laterales de los apartados de contenido */
 @media (min-width: 600px) {
   .somos .container,
   .talento .container,
   .aportamos .container,
   .clientes .container,
   .contacto .container,
-  .site-header .container,
   .site-footer .container {
     max-width: 2200px;
     padding-left: clamp(1.25rem, 5vw, 6rem);
     padding-right: clamp(1.25rem, 5vw, 6rem);
+  }
+}
+
+/* Márgenes del navbar superior según el PDF de diseño (logo ~11.18%, Contacto ~10% del borde derecho) */
+@media (min-width: 600px) {
+  .site-header .container {
+    max-width: 2200px;
+    padding-left: clamp(1.5rem, 11.18vw, 13.42rem);
+    padding-right: clamp(1.5rem, 10vw, 12rem);
   }
 }
 
@@ -160,11 +167,16 @@ input, textarea { font-family: inherit; }
 }
 
 .logo { display: inline-flex; flex-direction: column; line-height: 1; }
-.logo-img { height: clamp(28px, 3.2vw, 38px); width: auto; display: block; }
+.logo-img { height: clamp(28px, 3.5vw, 42px); width: auto; display: block; }
 
-.main-nav ul { display: flex; gap: clamp(1.75rem, 5.94vw, 6.5rem); }
+/* Espaciado de los links calibrado al PDF (gaps irregulares: ~97 / 126 / 116 / 118 px a 1920) */
+.main-nav ul { display: flex; gap: 0; }
+.main-nav li:nth-child(2) { margin-left: clamp(1.5rem, 5.06vw, 6.07rem); }   /* Somos → Talento */
+.main-nav li:nth-child(3) { margin-left: clamp(2rem, 6.55vw, 7.86rem); }    /* Talento → Aportamos */
+.main-nav li:nth-child(4) { margin-left: clamp(1.75rem, 6.02vw, 7.23rem); }  /* Aportamos → Clientes */
+.main-nav li:nth-child(5) { margin-left: clamp(1.75rem, 6.15vw, 7.38rem); }  /* Clientes → Contacto */
 .main-nav a {
-  font-size: clamp(0.85rem, 1.25vw, 1.4rem);
+  font-size: clamp(0.85rem, 1.25vw, 1.5rem);
   font-weight: 500;
   color: var(--white);
   position: relative;
@@ -256,14 +268,31 @@ input, textarea { font-family: inherit; }
   transform: scaleX(-1);
   z-index: 1;
 }
-.hero-content { position: relative; z-index: 2; padding-top: 3rem; margin-top: -4vh; }
-.hero-content--shift { padding-left: clamp(0px, 48vw, 660px); }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding-top: 3rem;
+  margin-top: -4vh;
+  /* Sin max-width centrado: el padding-left se mide desde el borde del viewport
+     para poder alinearlo con el enlace "Talento" de la navbar. */
+  max-width: none;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+.hero-content--shift {
+  /* Posición sincronizada por JS con el borde izquierdo de "Talento" (--hero-align-left). */
+  padding-left: var(--hero-align-left, 35vw);
+  padding-right: 1.5rem;
+}
 .hero-title {
   color: var(--white);
   font-size: clamp(3.4rem, 10.5vw, 13rem);
   line-height: 1.03;
   margin-bottom: 1.6rem;
   max-width: 960px;
+  /* Compensa el bearing izquierdo de Franklin Cond, igual que en .section-title */
+  margin-left: -0.035em;
 }
 .hero-title--multiline {
   font-size: clamp(2.1rem, 6vw, 4.4rem);
@@ -274,14 +303,12 @@ input, textarea { font-family: inherit; }
 .hero-slide--sagrada .hero-content,
 .hero-slide--colon .hero-content { margin-top: 0; }
 
-/* Encuadre específico del slide de las 2 torres: texto y badge más grandes y desplazados a la izquierda, según el PDF de diseño */
-.hero-slide--barcelona .hero-content--shift { padding-left: clamp(0px, 35vw, 560px); }
+/* Encuadre específico del slide de las 2 torres: texto y badge más grandes, según el PDF de diseño */
 .hero-slide--barcelona .hero-title { max-width: none; }
 .hero-slide--barcelona .anniversary-badge { width: clamp(220px, 26vw, 460px); }
 
-/* Encuadre específico del slide de la Sagrada Família: texto más grande, con interlineado más ajustado y desplazado a la izquierda, según el PDF de diseño */
+/* Encuadre específico del slide de la Sagrada Família: texto más grande, con interlineado más ajustado, según el PDF de diseño */
 .hero-slide--sagrada .hero-title--multiline { font-size: clamp(2.1rem, 6.5vw, 10rem); line-height: 0.84; }
-.hero-slide--sagrada .hero-content--shift { padding-left: clamp(0px, 35.5vw, 570px); }
 .hero-slide--sagrada .anniversary-badge { width: clamp(140px, 16.2vw, 260px); }
 /* El encuadre vertical de la cruz depende de la proporción del viewport (a mayor
    anchura relativa, la imagen ampliada al 125% queda más "alta" respecto al
@@ -302,9 +329,8 @@ input, textarea { font-family: inherit; }
   .hero-slide--sagrada { background-position: 0% 70% !important; }
 }
 
-/* Encuadre específico del slide de Colón: texto más grande, con interlineado más ajustado y desplazado a la izquierda, según el PDF de diseño */
+/* Encuadre específico del slide de Colón: texto más grande, con interlineado más ajustado, según el PDF de diseño */
 .hero-slide--colon .hero-title--multiline { font-size: clamp(2.1rem, 6.5vw, 10rem); line-height: 0.84; }
-.hero-slide--colon .hero-content--shift { padding-left: clamp(0px, 35.5vw, 570px); max-width: none; }
 .hero-slide--colon .hero-title { max-width: none; }
 .hero-slide--colon .anniversary-badge { width: clamp(140px, 16.2vw, 260px); }
 
@@ -783,6 +809,7 @@ section {
   }
   .main-nav.is-open { transform: translateX(0); }
   .main-nav ul { flex-direction: column; gap: 1.6rem; }
+  .main-nav li { margin-left: 0 !important; }
   .main-nav a { font-size: 1.1rem; }
   .nav-toggle { display: flex; z-index: 101; }
 

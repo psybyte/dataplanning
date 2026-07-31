@@ -64,6 +64,22 @@
 
   if (slides.length > 1) resetTimer();
 
+  /* ---------------- Hero text: alineado con el enlace "Talento" de la navbar ---------------- */
+  function syncHeroTextAlign() {
+    var talentoLink = mainNav.querySelector('a[href="#talento"]');
+    if (!talentoLink || window.innerWidth <= 780) {
+      document.documentElement.style.removeProperty("--hero-align-left");
+      return;
+    }
+    var x = Math.round(talentoLink.getBoundingClientRect().left);
+    document.documentElement.style.setProperty("--hero-align-left", x + "px");
+  }
+  window.addEventListener("resize", syncHeroTextAlign);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(syncHeroTextAlign);
+  }
+  syncHeroTextAlign();
+
   /* ---------------- Talento: team carousel ---------------- */
   var teamTrackList = document.getElementById("team-track-list");
   if (teamTrackList) {
