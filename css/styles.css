@@ -138,11 +138,12 @@ input, textarea { font-family: inherit; }
   }
 }
 
-/* Márgenes del navbar superior según el PDF de diseño (logo ~11.18%, Contacto ~10% del borde derecho) */
+/* Navbar: padding-left alineado con los títulos de apartado; padding-right y gaps
+   de los links se mantienen para no desplazar Somos/Talento/... (anclados a la derecha). */
 @media (min-width: 600px) {
   .site-header .container {
     max-width: 2200px;
-    padding-left: clamp(1.5rem, 11.18vw, 13.42rem);
+    padding-left: clamp(1.25rem, 5vw, 6rem);
     padding-right: clamp(1.5rem, 10vw, 12rem);
   }
 }
@@ -390,12 +391,6 @@ section {
 }
 
 /* ---------- Somos ---------- */
-.somos-banner {
-  height: clamp(90px, 16vw, 190px);
-  background-size: cover;
-  background-position: center;
-  margin-bottom: var(--section-padding);
-}
 .somos-text { max-width: none; }
 
 .feature-photo {
