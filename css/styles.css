@@ -107,9 +107,12 @@ input, textarea { font-family: inherit; }
 }
 
 .section-title {
-  font-size: clamp(2.4rem, 8.6vw, 10.4rem);
+  /* Tamaño reducido para que los títulos largos quepan en una sola línea
+     dentro del ancho de contenido (~90vw con padding lateral). */
+  font-size: clamp(1.15rem, 5.6vw, 7rem);
   line-height: 0.84;
   margin-bottom: 1.75rem;
+  white-space: nowrap;
   /* La fuente Franklin Cond tiene un pequeño margen de escape (bearing) a la
      izquierda de sus glifos en mayúsculas; se compensa para que el trazo
      visible del texto quede a ras con los párrafos y el logo. */
@@ -921,6 +924,6 @@ section {
 }
 
 @media (max-width: 520px) {
-  .section-title { font-size: 2.6rem; }
+  .section-title { font-size: clamp(0.95rem, 5.2vw, 1.85rem); }
   .team-info { padding: 1.6rem; }
 }
