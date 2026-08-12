@@ -597,13 +597,26 @@ section {
 .clients-carousel { overflow: hidden; }
 .clients-track {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  column-gap: clamp(1rem, 2.2vw, 2.4rem);
-  row-gap: clamp(2rem, 6vw, 4.5rem);
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: clamp(1.2rem, 2.8vw, 3rem);
+  row-gap: clamp(2.2rem, 5.5vw, 4.2rem);
   align-items: center;
 }
-.client-logo { height: clamp(26px, 3.1vw, 50px); display: flex; align-items: center; justify-content: center; }
-.client-logo img { height: 100%; width: auto; max-width: 100%; object-fit: contain; opacity: 0.95; }
+.client-logo {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.client-logo img {
+  width: auto;
+  height: auto;
+  max-width: 120px;
+  max-height: 36px;
+  object-fit: contain;
+  opacity: 0.95;
+}
 
 @media (max-width: 999px) {
   .clients-track { grid-template-columns: repeat(3, 1fr); }
@@ -635,78 +648,143 @@ section {
 .clients-arrow:hover { opacity: 0.7; }
 
 /* ---------- Contacto ---------- */
+/* 50/50 a ancho de contenedor: foto completa (sin recorte) + campos a todo el ancho de su columna */
 .contacto-grid {
   display: grid;
-  grid-template-columns: minmax(260px, 420px) 1fr;
-  gap: 3rem;
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: clamp(1.5rem, 2.5vw, 2.75rem);
+  row-gap: 1.4rem;
+  width: 100%;
 }
-.contacto-photo { border-radius: 4px; overflow: hidden; aspect-ratio: 1.38; }
-.contacto-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.contacto-photo {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  background: var(--navy-dark);
+}
+.contacto-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.contacto-primary {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.contacto-form {
+  grid-column: 2;
+  grid-row: 2;
+  width: 100%;
+  margin-left: 0;
+}
 
-.form-field { margin-bottom: 1.4rem; }
+.form-field { margin-bottom: 1.1rem; }
+.form-field:last-child { margin-bottom: 0; }
+.form-field--mensaje { flex: 1; display: flex; flex-direction: column; margin-bottom: 0; min-height: 0; }
 .form-field label {
   display: block;
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  color: var(--gray-blue);
+  margin-bottom: 0.45rem;
+  color: var(--white);
 }
+.form-field .file-input-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 33px;
+  margin-bottom: 0;
+  padding: 0 14px;
+  background: #009cdc;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 18.6px;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.form-field .file-input-button:hover { background: #ffffff; color: var(--navy-dark); }
 .form-field input[type="text"],
 .form-field input[type="email"],
 .form-field textarea {
   width: 100%;
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.4);
-  border-radius: 2px;
-  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(138, 163, 188, 0.55);
+  border-radius: 0;
+  padding: 0 0.9rem;
   color: var(--white);
   font-size: 0.95rem;
   transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+.form-field input[type="text"],
+.form-field input[type="email"] {
+  height: 48px;
+}
+.form-field textarea {
+  flex: 1 1 auto;
+  min-height: 160px;
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  resize: none;
 }
 .form-field input:focus,
 .form-field textarea:focus {
   outline: none;
   border-color: var(--cyan);
 }
-.form-field textarea { resize: vertical; }
 
 .form-field--honeypot { position: absolute; left: -9999px; opacity: 0; height: 0; margin: 0; }
+.form-field--cv { margin-bottom: 1.35rem; }
 
-.file-input { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.file-input { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; }
 .file-input input[type="file"] {
   position: absolute;
   width: 1px; height: 1px;
   opacity: 0;
   overflow: hidden;
 }
-.file-input-button {
-  display: inline-block;
-  background: var(--cyan);
-  color: var(--navy-dark);
-  font-weight: 600;
-  font-size: 0.85rem;
-  padding: 0.6rem 1.3rem;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+.file-input-name {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #8aa3bc;
 }
-.file-input-button:hover { background: var(--white); }
-.file-input-name { font-size: 0.85rem; color: var(--gray-blue); }
 
 .btn-submit {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 206px;
+  height: 58px;
+  padding: 0;
+  margin-top: 0.35rem;
   background: transparent;
-  border: 1px solid var(--cyan);
-  color: var(--white);
-  padding: 0.75rem 2.6rem;
-  border-radius: 3px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  border: 1px solid #009cdc;
+  color: #009cdc;
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 1;
+  cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
-.btn-submit:hover { background: var(--cyan); color: var(--navy-dark); }
+.btn-submit:hover { background: #009cdc; color: #ffffff; }
 
 .form-feedback { margin: 1rem 0 0; font-size: 0.9rem; min-height: 1.2em; }
 .form-feedback.is-success { color: var(--cyan); }
@@ -787,8 +865,29 @@ section {
   .team-arrow--prev { order: 1; }
   .team-dots { position: static; order: 2; }
   .team-arrow--next { order: 3; }
-  .contacto-grid { grid-template-columns: 1fr; }
-  .contacto-photo { max-height: 280px; }
+}
+
+@media (max-width: 1140px) {
+  .contacto-grid {
+    grid-template-columns: 1fr;
+  }
+  .contacto-photo {
+    grid-column: 1;
+    grid-row: auto;
+    max-width: 640px;
+  }
+  .contacto-primary {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .contacto-form {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .form-field textarea {
+    min-height: 180px;
+    height: 180px;
+  }
 }
 
 @media (max-width: 780px) {

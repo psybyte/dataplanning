@@ -133,30 +133,31 @@
 
   /* ---------------- Clientes: logos carousel ---------------- */
   var clientLogos = [
+    /* Página 1 — 5×2 según PDF de diseño */
     ["arquia.png", "Arquia Banca"],
     ["bluespace.png", "Bluespace"],
+    ["bra.png", "BRA"],
     ["catalonia-hotels.png", "Catalonia Hotels & Resorts"],
     ["diba.png", "Diputació de Barcelona"],
     ["efpa.png", "EFPA European Financial Planning Association"],
     ["fgc.png", "FGC"],
     ["fira-bcn.png", "Fira Barcelona"],
     ["fluidra.png", "Fluidra"],
-    ["grandvoyage.png", "GrandVoyage"],
-    ["imatra.png", "Imatra"],
-    ["la-selva.png", "La Selva"],
-    ["bra.png", "BRA"],
     ["generalitat-catalunya.png", "Generalitat de Catalunya"],
-    ["lagranjafoods.png", "La Granja Foods"],
-    ["lletera-campllong.png", "Lletera Campllong"],
-    ["monei.png", "MONEI"],
-    ["picart.png", "Picart"],
+    /* Página 2 */
+    ["grandvoyage.png", "GrandVoyage"],
     ["logotip-hospital.png", "Hospital de la Santa Creu i Sant Pau"],
-    ["logovichycatalan.png", "Vichy Catalan"],
-    ["maheso.png", "Maheso"],
+    ["lagranjafoods.png", "La Granja Foods"],
+    ["la-selva.png", "La Selva"],
+    ["lletera-campllong.png", "Lletera Campllong"],
     ["mgs.png", "MGS Seguros"],
+    ["maheso.png", "Maheso"],
     ["miro.png", "Miró"],
+    ["monei.png", "MONEI"],
     ["naturland.png", "Naturland"],
+    /* Página 3 */
     ["nieves.png", "Nieves"],
+    ["picart.png", "Picart"],
     ["proactive.png", "Proactive"],
     ["protegim.png", "Protegim"],
     ["roncato.png", "Roncato"],
@@ -164,6 +165,7 @@
     ["torras.png", "Torras"],
     ["upower.png", "Upower"],
     ["vaillant.png", "Vaillant"],
+    ["logovichycatalan.png", "Vichy Catalan"],
   ];
 
   var track = document.getElementById("clients-track");
@@ -184,9 +186,9 @@
 
   function computeGroupSize() {
     var w = window.innerWidth;
-    if (w < 600) return 6;
-    if (w < 1000) return 9;
-    return 18;
+    if (w < 600) return 4;  /* 2 columnas × 2 filas */
+    if (w < 1000) return 6; /* 3 columnas × 2 filas */
+    return 10;              /* 5 columnas × 2 filas */
   }
 
   function renderGroup() {
