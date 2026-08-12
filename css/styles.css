@@ -546,6 +546,7 @@ section {
   line-height: 1.4;
   color: var(--white);
 }
+.team-bio-diploma { margin-top: 0.9em; }
 
 .team-arrow {
   position: absolute;
@@ -568,7 +569,7 @@ section {
 .team-arrow:disabled { opacity: 0.35; cursor: default; }
 .team-arrow:not(:disabled):hover { background: var(--navy-dark); }
 .team-arrow svg { width: 32%; height: 32%; fill: var(--white); }
-.team-arrow--next { top: 27.38%; }
+.team-arrow--next { left: 7.07%; top: 11.8%; }
 
 .team-dots {
   position: absolute;
