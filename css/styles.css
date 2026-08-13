@@ -938,13 +938,20 @@ section {
   .nav-toggle { display: flex; z-index: 101; }
 
   .hero-colon-figure { height: 60%; left: 50%; transform: translateX(-50%) scaleX(-1); opacity: 0.55; }
+  .hero-slide--sagrada {
+    align-items: flex-start;
+  }
+  .hero-slide--sagrada .hero-content {
+    padding-top: 5.5rem;
+    margin-top: 0;
+  }
   .hero-sagrada-figure {
-    height: 58%;
+    height: 40%;
     max-width: 88%;
     left: 50%;
     transform: translateX(-50%);
     object-position: bottom center;
-    opacity: 0.7;
+    opacity: 1;
   }
   .hero-content { text-align: center; margin: 0 auto; }
   .hero-content--shift { padding-left: 0; }
