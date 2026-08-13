@@ -63,8 +63,11 @@
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body {
+html, body, main {
   margin: 0;
+  padding: 0;
+}
+body {
   font-family: var(--font-body);
   background: var(--navy);
   color: var(--text-body);
@@ -157,10 +160,15 @@ input, textarea { font-family: inherit; }
   top: 0; left: 0; right: 0;
   z-index: 100;
   padding: 1.1rem 0;
-  transition: background-color 0.35s ease, padding 0.35s ease, box-shadow .35s ease;
+  background: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  transition: padding 0.35s ease;
 }
 .site-header.is-scrolled {
   padding: 0.7rem 0;
+  background: transparent;
+  background-color: transparent;
 }
 
 .header-inner {
@@ -218,26 +226,28 @@ input, textarea { font-family: inherit; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ---------- Hero ---------- */
+/* En el flujo del documento desde y=0 (el header fixed no ocupa espacio).
+   Así la foto llena la pantalla y el navbar transparente queda encima. */
 .hero {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
   width: 100%;
   height: 100svh;
   min-height: 560px;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
   z-index: 0;
-}
-.hero-spacer {
-  height: 100svh;
-  min-height: 560px;
 }
 .page-content {
   position: relative;
   z-index: 1;
   background: var(--navy);
 }
-.hero-slides { position: relative; width: 100%; height: 100%; }
+.hero-slides {
+  position: absolute;
+  inset: 0;
+}
 .hero-slide {
   position: absolute;
   inset: 0;
