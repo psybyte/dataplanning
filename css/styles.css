@@ -271,10 +271,10 @@ input, textarea { font-family: inherit; }
 }
 .hero-colon-figure {
   position: absolute;
-  left: -1%;
+  left: -2%;
   bottom: 0;
-  height: 71%;
-  max-width: 42%;
+  height: 96%;
+  max-width: 52%;
   width: auto;
   object-fit: contain;
   object-position: bottom left;
