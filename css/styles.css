@@ -938,15 +938,8 @@ section {
   .nav-toggle { display: flex; z-index: 101; }
 
   .hero-colon-figure { height: 60%; left: 50%; transform: translateX(-50%) scaleX(-1); opacity: 0.55; }
-  .hero-slide--sagrada {
-    align-items: flex-start;
-  }
-  .hero-slide--sagrada .hero-content {
-    padding-top: 5.5rem;
-    margin-top: 0;
-  }
   .hero-sagrada-figure {
-    height: 40%;
+    height: 36%;
     max-width: 88%;
     left: 50%;
     transform: translateX(-50%);
@@ -957,6 +950,9 @@ section {
   .hero-content--shift { padding-left: 0; }
   .hero-title { margin-left: auto; margin-right: auto; }
   .anniversary-badge { margin-left: auto; margin-right: auto; }
+  .hero-slide--sagrada .hero-content {
+    margin-top: -5vh;
+  }
 
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .social-icons { margin-left: 0; }
