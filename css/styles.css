@@ -494,9 +494,9 @@ section {
 .team-photo {
   position: absolute;
   left: 7.07%;
-  top: 11.8%;
+  top: 18%;
   width: 49.65%;
-  height: 77.9%;
+  height: 74%;
   z-index: 2;
   background: var(--navy-dark);
   box-shadow: 0 8px 14px rgba(0,0,0,0.2);
@@ -559,9 +559,10 @@ section {
   position: absolute;
   z-index: 3;
   left: 0;
-  top: 11.8%;
+  top: 0;
   width: 7.07%;
-  height: 15.58%;
+  aspect-ratio: 1 / 1;
+  height: auto;
   border: none;
   background: var(--cyan);
   display: flex;
@@ -575,8 +576,8 @@ section {
 .team-carousel.is-visible .team-arrow { transform: translateX(0); }
 .team-arrow:disabled { opacity: 0.35; cursor: default; }
 .team-arrow:not(:disabled):hover { background: var(--navy-dark); }
-.team-arrow svg { width: 32%; height: 32%; fill: var(--white); }
-.team-arrow--next { left: 7.07%; top: 11.8%; }
+.team-arrow svg { width: 52%; height: 52%; fill: var(--white); }
+.team-arrow--next { left: 7.07%; top: 0; }
 
 .team-dots {
   position: absolute;
@@ -1017,8 +1018,17 @@ section {
     overflow: visible;
   }
   .team-photo {
-    height: 86%;
+    top: calc(2.85rem + 0.4rem);
+    height: calc(86% - 2.2rem);
   }
+  .team-arrow {
+    width: 2.85rem;
+    height: 2.85rem;
+    aspect-ratio: 1 / 1;
+    top: 0;
+  }
+  .team-arrow--prev { left: 0; }
+  .team-arrow--next { left: 2.85rem; top: 0; }
   .team-info h3 {
     font-size: clamp(1.2rem, 6.2vw, 1.7rem);
   }
@@ -1034,6 +1044,10 @@ section {
     line-height: 1.32;
   }
   .team-bio-diploma { margin-top: 0.5em; }
+  .team-arrow svg {
+    width: 56%;
+    height: 56%;
+  }
 }
 
 @media (max-width: 520px) {
