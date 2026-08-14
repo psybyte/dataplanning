@@ -839,63 +839,6 @@ section {
 /* =========================================================
    Responsive
    ========================================================= */
-@media (max-width: 900px) {
-  .team-carousel {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 1rem;
-    height: auto;
-    overflow: visible;
-  }
-  .team-track {
-    flex: 1 0 100%;
-    order: 0;
-    height: auto;
-  }
-  .team-track-list {
-    align-items: stretch;
-  }
-  .team-card {
-    aspect-ratio: unset;
-    height: auto;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: visible;
-  }
-  .team-photo {
-    position: static;
-    width: 100%;
-    max-width: none;
-    height: auto;
-    aspect-ratio: 4 / 3;
-    margin: 0;
-    transform: none;
-    flex: none;
-  }
-  .team-info {
-    position: static;
-    left: auto;
-    top: auto;
-    width: 100%;
-    height: auto;
-    padding: 1.8rem 1.5rem 2rem;
-    flex: 1 1 auto;
-    overflow: visible;
-  }
-  .team-arrow {
-    position: static;
-    width: 42px;
-    height: 42px;
-    transform: none;
-  }
-  .team-arrow--prev { order: 1; }
-  .team-dots { position: static; order: 2; }
-  .team-arrow--next { order: 3; }
-}
-
 @media (max-width: 1140px) {
   .contacto-grid {
     grid-template-columns: 1fr;
@@ -1054,9 +997,45 @@ section {
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .social-icons { margin-left: 0; }
   .footer-contact { text-align: left; }
+
+  /* Carrusel de personas: misma composición de escritorio; la caja cyan
+     crece con la bio para que no se corte (p. ej. Pedro Mateo). */
+  .team-card {
+    aspect-ratio: unset;
+    height: auto;
+    min-height: 0;
+  }
+  .team-info {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 83.68%;
+    margin-left: 16.32%;
+    height: auto;
+    min-height: 16rem;
+    padding: 1.15rem 1rem 1.5rem 44%;
+    overflow: visible;
+  }
+  .team-photo {
+    height: 86%;
+  }
+  .team-info h3 {
+    font-size: clamp(1.2rem, 6.2vw, 1.7rem);
+  }
+  .team-role {
+    font-size: clamp(0.82rem, 4vw, 1.05rem);
+    margin-bottom: 0.5em;
+  }
+  .team-bio {
+    gap: 0.15em;
+  }
+  .team-bio li {
+    font-size: clamp(0.72rem, 3.3vw, 0.88rem);
+    line-height: 1.32;
+  }
+  .team-bio-diploma { margin-top: 0.5em; }
 }
 
 @media (max-width: 520px) {
   .section-title { font-size: clamp(0.95rem, 5.2vw, 1.85rem); }
-  .team-info { padding: 1.6rem; }
 }
