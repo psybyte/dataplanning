@@ -979,7 +979,19 @@ section {
      estatua anclada abajo, centrada, sin tocar el 25th anniversary. */
   .hero-slide--colon .hero-content {
     padding-top: 24vh;
+    padding-left: 0;
+    padding-right: 0;
     margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    max-width: calc(100% - 2.5rem);
+    text-align: left;
+  }
+  .hero-slide--colon .hero-title,
+  .hero-slide--colon .hero-title--multiline {
+    margin-left: 0;
+    margin-right: 0;
   }
   .hero-slide--colon .hero-title--multiline {
     font-size: clamp(2.2rem, 11.5vw, 3rem);
@@ -988,6 +1000,8 @@ section {
   }
   .hero-slide--colon .anniversary-badge {
     width: clamp(170px, 48vw, 230px);
+    margin-left: 0;
+    margin-right: 0;
   }
   .hero-colon-figure {
     height: 42%;
@@ -999,11 +1013,23 @@ section {
     object-position: bottom center;
   }
 
-  /* Slide 2 · Cruz (móvil): texto arriba centrado; cruz anclada abajo
-     (~35–38% alto) con hueco claro bajo el 25th anniversary. */
+  /* Slide 2 · Cruz (móvil): texto a la izquierda; cruz anclada abajo
+     con hueco claro bajo el 25th anniversary. */
   .hero-slide--sagrada .hero-content {
     padding-top: 24vh;
+    padding-left: 0;
+    padding-right: 0;
     margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    max-width: calc(100% - 2.5rem);
+    text-align: left;
+  }
+  .hero-slide--sagrada .hero-title,
+  .hero-slide--sagrada .hero-title--multiline {
+    margin-left: 0;
+    margin-right: 0;
   }
   .hero-slide--sagrada .hero-title--multiline {
     font-size: clamp(2.2rem, 11.5vw, 3rem);
@@ -1012,6 +1038,8 @@ section {
   }
   .hero-slide--sagrada .anniversary-badge {
     width: clamp(170px, 48vw, 230px);
+    margin-left: 0;
+    margin-right: 0;
   }
   .hero-sagrada-figure {
     height: 36%;
