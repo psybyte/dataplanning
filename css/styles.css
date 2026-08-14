@@ -937,21 +937,90 @@ section {
   .main-nav a { font-size: 1.1rem; }
   .nav-toggle { display: flex; z-index: 101; }
 
-  .hero-colon-figure { height: 60%; left: 50%; transform: translateX(-50%) scaleX(-1); opacity: 0.55; }
+  .hero-slide {
+    align-items: flex-start;
+  }
+  .hero-content {
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 5.6rem;
+  }
+  .hero-content--shift { padding-left: 0; padding-right: 1.25rem; }
+  .hero-slide--sagrada .hero-content,
+  .hero-slide--colon .hero-content {
+    margin-top: 0;
+  }
+  .hero-title { margin-left: auto; margin-right: auto; }
+  .anniversary-badge { margin-left: auto; margin-right: auto; }
+  .hero-slide--barcelona .anniversary-badge,
+  .hero-slide--sagrada .anniversary-badge,
+  .hero-slide--colon .anniversary-badge {
+    width: clamp(150px, 44vw, 210px);
+  }
+
+  /* Slide 1 · Torres (móvil): las dos torres centradas, con cielo suficiente
+     entre el texto y los remates (foto un poco más alta para poder bajarlas). */
+  .hero-slide--barcelona {
+    background-position: 26% 8%;
+    background-size: auto 120%;
+  }
+  .hero-slide--barcelona .hero-content {
+    padding-top: 4.4rem;
+  }
+  .hero-slide--barcelona .hero-title {
+    font-size: clamp(2.9rem, 15vw, 3.8rem);
+    margin-bottom: 0.85rem;
+  }
+  .hero-slide--barcelona .anniversary-badge {
+    width: clamp(170px, 48vw, 230px);
+  }
+
+  /* Slide 3 · Colón (móvil): mismo encuadre de texto que la cruz;
+     estatua anclada abajo, centrada, sin tocar el 25th anniversary. */
+  .hero-slide--colon .hero-content {
+    padding-top: 24vh;
+    margin-top: 0;
+  }
+  .hero-slide--colon .hero-title--multiline {
+    font-size: clamp(2.2rem, 11.5vw, 3rem);
+    line-height: 0.9;
+    margin-bottom: 0.85rem;
+  }
+  .hero-slide--colon .anniversary-badge {
+    width: clamp(170px, 48vw, 230px);
+  }
+  .hero-colon-figure {
+    height: 42%;
+    max-width: 92%;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%) scaleX(-1);
+    opacity: 1;
+    object-position: bottom center;
+  }
+
+  /* Slide 2 · Cruz (móvil): texto arriba centrado; cruz anclada abajo
+     (~35–38% alto) con hueco claro bajo el 25th anniversary. */
+  .hero-slide--sagrada .hero-content {
+    padding-top: 24vh;
+    margin-top: 0;
+  }
+  .hero-slide--sagrada .hero-title--multiline {
+    font-size: clamp(2.2rem, 11.5vw, 3rem);
+    line-height: 0.9;
+    margin-bottom: 0.85rem;
+  }
+  .hero-slide--sagrada .anniversary-badge {
+    width: clamp(170px, 48vw, 230px);
+  }
   .hero-sagrada-figure {
     height: 36%;
-    max-width: 88%;
+    max-width: 72%;
     left: 50%;
+    bottom: 0;
     transform: translateX(-50%);
     object-position: bottom center;
     opacity: 1;
-  }
-  .hero-content { text-align: center; margin: 0 auto; }
-  .hero-content--shift { padding-left: 0; }
-  .hero-title { margin-left: auto; margin-right: auto; }
-  .anniversary-badge { margin-left: auto; margin-right: auto; }
-  .hero-slide--sagrada .hero-content {
-    margin-top: -5vh;
   }
 
   .footer-inner { flex-direction: column; align-items: flex-start; }
