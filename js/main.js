@@ -273,4 +273,186 @@
         submitBtn.disabled = false;
       });
   });
+
+  /* ---------------- Navbar: ocultar líneas que se solapan con logo o links ---------------- */
+  var navCollisionTargets = [];
+  var navCollisionRaf = 0;
+
+  function collectNavCollisionTargets() {
+    navCollisionTargets = Array.prototype.slice.call(document.querySelectorAll([
+      ".page-content h2",
+      ".page-content h3",
+      ".page-content p",
+      ".page-content li",
+      ".page-content label",
+      ".page-content .feature-photo-caption",
+      ".page-content .file-input-name",
+      ".page-content .btn-submit",
+      ".page-content .client-logo",
+      ".hero-title",
+      ".site-footer .footer-line",
+      ".site-footer .footer-bottom p"
+    ].join(",")));
+  }
+
+  function rectsOverlap(a, b) {
+    return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+  }
+
+  function getNavObstacleRects() {
+    var nodes = [];
+    var logo = header.querySelector(".logo-img") || header.querySelector(".logo");
+    if (logo) nodes.push(logo);
+    if (window.innerWidth > 780) {
+      Array.prototype.push.apply(nodes, mainNav.querySelectorAll("a"));
+    } else if (navToggle) {
+      nodes.push(navToggle);
+    }
+    var pad = 8;
+    var rects = [];
+    for (var i = 0; i < nodes.length; i++) {
+      var r = nodes[i].getBoundingClientRect();
+      if (r.width < 1 || r.height < 1) continue;
+      rects.push({
+        left: r.left - pad,
+        right: r.right + pad,
+        top: r.top - pad,
+        bottom: r.bottom + pad
+      });
+    }
+    return rects;
+  }
+
+  function getTextLines(el) {
+    var groups = [];
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    var node;
+    while ((node = walker.nextNode())) {
+      if (!/\S/.test(node.nodeValue)) continue;
+      var range = document.createRange();
+      range.selectNodeContents(node);
+      var rects = range.getClientRects();
+      for (var i = 0; i < rects.length; i++) {
+        var r = rects[i];
+        if (r.width < 1 || r.height < 1) continue;
+        var placed = false;
+        for (var g = 0; g < groups.length; g++) {
+          if (Math.abs(groups[g].top - r.top) < Math.max(4, r.height * 0.4)) {
+            groups[g].top = Math.min(groups[g].top, r.top);
+            groups[g].bottom = Math.max(groups[g].bottom, r.bottom);
+            groups[g].left = Math.min(groups[g].left, r.left);
+            groups[g].right = Math.max(groups[g].right, r.right);
+            placed = true;
+            break;
+          }
+        }
+        if (!placed) {
+          groups.push({ top: r.top, bottom: r.bottom, left: r.left, right: r.right });
+        }
+      }
+    }
+    groups.sort(function (a, b) { return a.top - b.top; });
+    return groups;
+  }
+
+  function clearNavOcclusion(el) {
+    el.classList.remove("is-nav-occluded");
+    el.style.maskImage = "";
+    el.style.webkitMaskImage = "";
+  }
+
+  function updateNavCollisions() {
+    var obstacles = getNavObstacleRects();
+    var headerBox = header.getBoundingClientRect();
+    var bandTop = -16;
+    var bandBottom = headerBox.bottom + 16;
+
+    for (var t = 0; t < navCollisionTargets.length; t++) {
+      var el = navCollisionTargets[t];
+      var box = el.getBoundingClientRect();
+      if (box.bottom < bandTop || box.top > bandBottom || box.width < 1 || box.height < 1) {
+        clearNavOcclusion(el);
+        continue;
+      }
+
+      var lines = getTextLines(el);
+      if (!lines.length) {
+        if (obstacles.some(function (o) { return rectsOverlap(box, o); })) {
+          el.classList.add("is-nav-occluded");
+        } else {
+          clearNavOcclusion(el);
+        }
+        continue;
+      }
+
+      var hiddenFlags = [];
+      var anyHidden = false;
+      for (var i = 0; i < lines.length; i++) {
+        var hit = false;
+        for (var o = 0; o < obstacles.length; o++) {
+          if (rectsOverlap(lines[i], obstacles[o])) {
+            hit = true;
+            break;
+          }
+        }
+        hiddenFlags.push(hit);
+        if (hit) anyHidden = true;
+      }
+
+      if (!anyHidden) {
+        clearNavOcclusion(el);
+        continue;
+      }
+
+      if (lines.length === 1) {
+        el.style.maskImage = "";
+        el.style.webkitMaskImage = "";
+        el.classList.add("is-nav-occluded");
+        continue;
+      }
+
+      el.classList.remove("is-nav-occluded");
+      var stops = [];
+      for (var n = 0; n < hiddenFlags.length; n++) {
+        var start = Math.max(0, (lines[n].top - box.top) / box.height * 100);
+        var end = Math.min(100, (lines[n].bottom - box.top) / box.height * 100);
+        if (n === 0 && start > 0.4) {
+          stops.push("#000 0%", "#000 " + start + "%");
+        }
+        var color = hiddenFlags[n] ? "transparent" : "#000";
+        stops.push(color + " " + start + "%", color + " " + end + "%");
+        if (n < hiddenFlags.length - 1) {
+          var nextStart = Math.max(0, (lines[n + 1].top - box.top) / box.height * 100);
+          if (nextStart > end + 0.2) {
+            stops.push("#000 " + end + "%", "#000 " + nextStart + "%");
+          }
+        } else if (end < 99.5) {
+          stops.push("#000 " + end + "%", "#000 100%");
+        }
+      }
+      var gradient = "linear-gradient(to bottom, " + stops.join(", ") + ")";
+      el.style.maskImage = gradient;
+      el.style.webkitMaskImage = gradient;
+    }
+  }
+
+  function requestNavCollisionCheck() {
+    if (navCollisionRaf) return;
+    navCollisionRaf = requestAnimationFrame(function () {
+      navCollisionRaf = 0;
+      updateNavCollisions();
+    });
+  }
+
+  collectNavCollisionTargets();
+  window.addEventListener("scroll", requestNavCollisionCheck, { passive: true });
+  window.addEventListener("resize", function () {
+    collectNavCollisionTargets();
+    requestNavCollisionCheck();
+  });
+  header.addEventListener("transitionend", requestNavCollisionCheck);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(requestNavCollisionCheck);
+  }
+  requestNavCollisionCheck();
 })();

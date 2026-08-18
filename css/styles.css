@@ -225,6 +225,11 @@ input, textarea { font-family: inherit; }
 .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+/* Línea de contenido que choca con logo o textos del navbar */
+.is-nav-occluded {
+  opacity: 0 !important;
+}
+
 /* ---------- Hero ---------- */
 /* En el flujo del documento desde y=0 (el header fixed no ocupa espacio).
    Así la foto llena la pantalla y el navbar transparente queda encima. */
@@ -243,6 +248,11 @@ input, textarea { font-family: inherit; }
   position: relative;
   z-index: 1;
   background: var(--navy);
+}
+/* El navbar es fixed: al ir a #somos / #talento / … el titular queda
+   por debajo, no tapado ni oculto por colisión. */
+.page-content > section {
+  scroll-margin-top: calc(clamp(28px, 3.5vw, 42px) + 3.5rem);
 }
 .hero-slides {
   position: absolute;
