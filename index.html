@@ -18,7 +18,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 <link rel="preload" href="assets/fonts/Franklin-Extra-Cond--Gothic.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="css/styles.css?v=32">
+<link rel="stylesheet" href="css/styles.css?v=35">
 </head>
 <body>
 
@@ -172,12 +172,14 @@
           </div>
         </div>
 
-        <button class="team-arrow team-arrow--prev" aria-label="Persona anterior" disabled>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="16,3 16,21 5,12"></polygon></svg>
-        </button>
-        <button class="team-arrow team-arrow--next" aria-label="Siguiente persona">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="8,3 8,21 19,12"></polygon></svg>
-        </button>
+        <div class="team-arrows">
+          <button class="team-arrow team-arrow--prev" aria-label="Persona anterior" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="16,3 16,21 5,12"></polygon></svg>
+          </button>
+          <button class="team-arrow team-arrow--next" aria-label="Siguiente persona">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="8,3 8,21 19,12"></polygon></svg>
+          </button>
+        </div>
 
         <div class="team-dots" id="team-dots">
           <span class="team-dot is-active"></span>

@@ -474,6 +474,9 @@ section {
 .talento-text { max-width: none; margin-bottom: 2.5rem; }
 
 .team-carousel {
+  --team-photo-left: 7.07%;
+  --team-photo-top: 18%;
+  --team-info-left: 16.32%;
   position: relative;
   width: 100%;
   transform: scale(0.94) translateY(24px);
@@ -487,7 +490,8 @@ section {
 }
 @media (prefers-reduced-motion: reduce) {
   .team-carousel { transform: none; opacity: 1; }
-  .team-photo, .team-arrow { transform: none; }
+  .team-photo { transform: none; }
+  .team-arrows { transform: translate(-88%, -88%); }
 }
 
 .team-track { overflow: hidden; }
@@ -503,8 +507,8 @@ section {
 }
 .team-photo {
   position: absolute;
-  left: 7.07%;
-  top: 18%;
+  left: var(--team-photo-left);
+  top: var(--team-photo-top);
   width: 49.65%;
   height: 74%;
   z-index: 2;
@@ -524,7 +528,7 @@ section {
 .team-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); display: block; }
 .team-info {
   position: absolute;
-  left: 16.32%;
+  left: var(--team-info-left);
   top: 0;
   width: 83.68%;
   height: 100%;
@@ -565,12 +569,26 @@ section {
 }
 .team-bio-diploma { margin-top: 0.9em; }
 
-.team-arrow {
+.team-arrows {
   position: absolute;
   z-index: 3;
-  left: 0;
-  top: 0;
-  width: 7.07%;
+  left: var(--team-info-left);
+  top: var(--team-photo-top);
+  display: flex;
+  width: 14.14%;
+  transform: translate(calc(-88% + clamp(50px, 7vw, 130px)), -88%);
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+  will-change: transform;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.22),
+    0 8px 18px rgba(0, 0, 0, 0.28);
+}
+.team-carousel.is-visible .team-arrows {
+  transform: translate(-88%, -88%);
+}
+.team-arrow {
+  flex: 0 0 50%;
+  width: 50%;
   aspect-ratio: 1 / 1;
   height: auto;
   border: none;
@@ -579,15 +597,11 @@ section {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transform: translateX(clamp(50px, 7vw, 130px));
-  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, background-color 0.2s ease, opacity 0.2s ease;
-  will-change: transform;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
 }
-.team-carousel.is-visible .team-arrow { transform: translateX(0); }
 .team-arrow:disabled { opacity: 0.35; cursor: default; }
 .team-arrow:not(:disabled):hover { background: var(--navy-dark); }
 .team-arrow svg { width: 52%; height: 52%; fill: var(--white); }
-.team-arrow--next { left: 7.07%; top: 0; }
 
 .team-dots {
   position: absolute;
@@ -1023,24 +1037,26 @@ section {
     left: auto;
     top: auto;
     width: 83.68%;
-    margin-left: 16.32%;
+    margin-left: var(--team-info-left);
     height: auto;
     min-height: 16rem;
     padding: 1.15rem 1rem 1.5rem 44%;
     overflow: visible;
   }
+  .team-carousel {
+    --team-photo-top: 2.5rem;
+  }
   .team-photo {
-    top: calc(2.85rem + 0.4rem);
-    height: calc(86% - 2.2rem);
+    top: var(--team-photo-top);
+    height: calc(86% - 1.4rem);
   }
-  .team-arrow {
-    width: 2.85rem;
-    height: 2.85rem;
-    aspect-ratio: 1 / 1;
-    top: 0;
+  .team-arrows {
+    width: 5.7rem;
+    transform: translate(-88%, -88%);
   }
-  .team-arrow--prev { left: 0; }
-  .team-arrow--next { left: 2.85rem; top: 0; }
+  .team-carousel.is-visible .team-arrows {
+    transform: translate(-88%, -88%);
+  }
   .team-info h3 {
     font-size: clamp(1.2rem, 6.2vw, 1.7rem);
   }
