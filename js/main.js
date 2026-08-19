@@ -289,6 +289,7 @@
       ".page-content .file-input-name",
       ".page-content .btn-submit",
       ".page-content .client-logo",
+      ".page-content .divider",
       ".hero-title",
       ".site-footer .footer-line",
       ".site-footer .footer-bottom p"
@@ -361,6 +362,18 @@
     el.style.webkitMaskImage = "";
   }
 
+  function getDividerLineRect(el) {
+    var box = el.getBoundingClientRect();
+    var lineHeight = 3;
+    return {
+      top: box.top,
+      bottom: box.top + lineHeight,
+      left: box.left,
+      right: box.right,
+      width: box.width
+    };
+  }
+
   function updateNavCollisions() {
     var obstacles = getNavObstacleRects();
     var headerBox = header.getBoundingClientRect();
@@ -370,6 +383,19 @@
     for (var t = 0; t < navCollisionTargets.length; t++) {
       var el = navCollisionTargets[t];
       var box = el.getBoundingClientRect();
+
+      if (el.classList.contains("divider")) {
+        var dividerLine = getDividerLineRect(el);
+        if (dividerLine.bottom < bandTop || dividerLine.top > bandBottom || dividerLine.width < 1) {
+          clearNavOcclusion(el);
+        } else {
+          el.style.maskImage = "";
+          el.style.webkitMaskImage = "";
+          el.classList.add("is-nav-occluded");
+        }
+        continue;
+      }
+
       if (box.bottom < bandTop || box.top > bandBottom || box.width < 1 || box.height < 1) {
         clearNavOcclusion(el);
         continue;
