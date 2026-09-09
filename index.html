@@ -15,18 +15,61 @@
 <meta name="description" content="Dataplanning es una agencia de medios independiente en Barcelona. Desde 2001 aportamos soluciones integrales de comunicación con un enfoque estratégico y altamente personalizado. Pure Accuracy." data-i18n-attr="content:meta.description">
 <meta name="keywords" content="agencia de medios, agencia de medios Barcelona, planificación de medios, comunicación, publicidad, Dataplanning" data-i18n-attr="content:meta.keywords">
 <meta name="author" content="Dataplanning">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.dataplanning.es/">
 
 <meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
 <meta property="og:title" content="Dataplanning · Agencia de medios en Barcelona · Pure Accuracy" data-i18n-attr="content:meta.ogTitle">
 <meta property="og:description" content="Mucho más que una agencia de medios. Personas que marcan la diferencia. 25 años conectando marcas y audiencias." data-i18n-attr="content:meta.ogDescription">
-<meta property="og:image" content="assets/images/hero/hero-barcelona.jpg">
+<meta property="og:image" content="https://www.dataplanning.es/assets/images/hero/hero-barcelona.jpg">
 <meta property="og:url" content="https://www.dataplanning.es/">
 <meta name="twitter:card" content="summary_large_image">
 
+<base href="/">
 <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 <link rel="preload" href="assets/fonts/Franklin-Extra-Cond--Gothic.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="preload" href="assets/fonts/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="css/styles.css?v=37">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Dataplanning",
+      "url": "https://www.dataplanning.es/",
+      "logo": "https://www.dataplanning.es/assets/images/logo-dataplanning.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Beethoven 15, 3º 6ª",
+        "addressLocality": "Barcelona",
+        "postalCode": "08021",
+        "addressCountry": "ES"
+      },
+      "telephone": "+34-93-241-19-98",
+      "email": "hola@dataplanning.es"
+    },
+    {
+      "@type": "WebSite",
+      "name": "Dataplanning",
+      "url": "https://www.dataplanning.es/",
+      "inLanguage": "es-ES"
+    },
+    {
+      "@type": "ItemList",
+      "name": "Navegación principal",
+      "itemListElement": [
+        {"@type": "SiteNavigationElement", "position": 1, "name": "Somos", "url": "https://www.dataplanning.es/somos/"},
+        {"@type": "SiteNavigationElement", "position": 2, "name": "Talento", "url": "https://www.dataplanning.es/talento/"},
+        {"@type": "SiteNavigationElement", "position": 3, "name": "Aportamos", "url": "https://www.dataplanning.es/aportamos/"},
+        {"@type": "SiteNavigationElement", "position": 4, "name": "Clientes", "url": "https://www.dataplanning.es/clientes/"},
+        {"@type": "SiteNavigationElement", "position": 5, "name": "Contacto", "url": "https://www.dataplanning.es/contacto/"}
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -35,17 +78,17 @@
 <!-- ===================== HEADER ===================== -->
 <header class="site-header" id="site-header">
   <div class="container header-inner">
-    <a href="#inicio" class="logo" aria-label="Dataplanning, inicio" data-i18n-attr="aria-label:logo.home">
+    <a href="/" class="logo" aria-label="Dataplanning, inicio" data-i18n-attr="aria-label:logo.home">
       <img src="assets/images/logo-dataplanning.png" alt="Dataplanning · Pure Accuracy" class="logo-img">
     </a>
 
     <nav class="main-nav" id="main-nav" aria-label="Navegación principal" data-i18n-attr="aria-label:nav.main">
       <ul>
-        <li><a href="#somos" data-i18n="nav.somos">Somos</a></li>
-        <li><a href="#talento" data-i18n="nav.talento">Talento</a></li>
-        <li><a href="#aportamos" data-i18n="nav.aportamos">Aportamos</a></li>
-        <li><a href="#clientes" data-i18n="nav.clientes">Clientes</a></li>
-        <li><a href="#contacto" data-i18n="nav.contacto">Contacto</a></li>
+        <li><a href="/somos/" data-i18n="nav.somos">Somos</a></li>
+        <li><a href="/talento/" data-i18n="nav.talento">Talento</a></li>
+        <li><a href="/aportamos/" data-i18n="nav.aportamos">Aportamos</a></li>
+        <li><a href="/clientes/" data-i18n="nav.clientes">Clientes</a></li>
+        <li><a href="/contacto/" data-i18n="nav.contacto">Contacto</a></li>
       </ul>
     </nav>
 
@@ -108,7 +151,7 @@
     </div>
 
     <div class="hero-dots" id="hero-dots" role="tablist" aria-label="Selector de diapositivas" data-i18n-attr="aria-label:hero.slides"></div>
-    <a href="#somos" class="scroll-cue" aria-label="Ir al contenido" data-i18n-attr="aria-label:hero.scroll">
+    <a href="/somos/" class="scroll-cue" aria-label="Ir al contenido" data-i18n-attr="aria-label:hero.scroll">
       <span></span>
     </a>
   </section>
@@ -282,7 +325,7 @@
           </div>
         </div>
 
-        <form class="contacto-form" id="contacto-form" action="php/contact.php" method="POST" enctype="multipart/form-data" novalidate>
+        <form class="contacto-form" id="contacto-form" action="/php/contact.php" method="POST" enctype="multipart/form-data" novalidate>
           <div class="form-field form-field--cv">
             <label for="cv" data-i18n="contacto.cv">¿Quieres trabajar con nosotros? Adjunta CV</label>
             <div class="file-input">
@@ -313,7 +356,7 @@
 <!-- ===================== FOOTER ===================== -->
 <footer class="site-footer">
   <div class="container footer-inner">
-    <a href="#inicio" class="logo logo--footer" aria-label="Dataplanning, inicio" data-i18n-attr="aria-label:logo.home">
+    <a href="/" class="logo logo--footer" aria-label="Dataplanning, inicio" data-i18n-attr="aria-label:logo.home">
       <img src="assets/images/logo-dataplanning.png" alt="Dataplanning · Pure Accuracy" class="logo-img">
     </a>
 
@@ -351,7 +394,7 @@
   </div>
 </footer>
 
-<script src="js/i18n.js?v=3"></script>
-<script src="js/main.js?v=34"></script>
+<script src="js/i18n.js?v=4"></script>
+<script src="js/main.js?v=35"></script>
 </body>
 </html>

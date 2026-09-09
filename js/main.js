@@ -3,6 +3,79 @@
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
+  var SECTION_SLUGS = (window.DP_I18N && window.DP_I18N.SECTION_SLUGS) ||
+    ["somos", "talento", "aportamos", "clientes", "contacto"];
+
+  function sectionFromPath() {
+    return window.DP_I18N ? window.DP_I18N.currentSection() : "";
+  }
+
+  function normalizeHashToPath() {
+    var hash = (window.location.hash || "").replace(/^#/, "");
+    if (!hash) return;
+    var path = null;
+    if (hash === "inicio" || hash === "contenido") path = "/";
+    else if (SECTION_SLUGS.indexOf(hash) !== -1) path = "/" + hash + "/";
+    if (!path) return;
+    history.replaceState(null, "", path + window.location.search);
+    if (window.DP_I18N) window.DP_I18N.applySeo();
+  }
+
+  function scrollToCurrentSection(instant) {
+    var slug = sectionFromPath() || "inicio";
+    var el = document.getElementById(slug);
+    if (!el) return;
+    el.scrollIntoView({ behavior: instant ? "auto" : "smooth", block: "start" });
+  }
+
+  function navigateTo(path, push) {
+    if (push) history.pushState(null, "", path);
+    if (window.DP_I18N) window.DP_I18N.applySeo();
+    scrollToCurrentSection(!push);
+    syncHeroTextAlign();
+    requestNavCollisionCheck();
+  }
+
+  normalizeHashToPath();
+  if (sectionFromPath()) {
+    scrollToCurrentSection(true);
+    window.addEventListener("load", function () { scrollToCurrentSection(true); });
+  }
+
+  window.addEventListener("popstate", function () {
+    if (window.DP_I18N) window.DP_I18N.applySeo();
+    scrollToCurrentSection(true);
+  });
+
+  document.addEventListener("click", function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var link = e.target.closest("a");
+    if (!link || link.target === "_blank" || link.hasAttribute("download")) return;
+    var href = link.getAttribute("href");
+    if (!href || href.indexOf("mailto:") === 0 || href.indexOf("tel:") === 0) return;
+    var url;
+    try { url = new URL(link.href, window.location.origin); } catch (err) { return; }
+    if (url.origin !== window.location.origin) return;
+
+    var slug = url.pathname.replace(/^\/+|\/+$/g, "");
+    var hashId = (url.hash || "").replace(/^#/, "");
+    if (hashId && SECTION_SLUGS.indexOf(hashId) !== -1) {
+      e.preventDefault();
+      navigateTo("/" + hashId + "/", true);
+      return;
+    }
+    if (hashId) return;
+    if (slug === "" || slug === "index.html") {
+      e.preventDefault();
+      navigateTo("/" + url.search, true);
+      return;
+    }
+    if (SECTION_SLUGS.indexOf(slug) !== -1) {
+      e.preventDefault();
+      navigateTo("/" + slug + "/" + url.search, true);
+    }
+  });
+
   function t(key, vars) {
     return window.DP_I18N ? window.DP_I18N.t(key, vars) : key;
   }
@@ -84,7 +157,7 @@
 
   /* ---------------- Hero text: alineado con el enlace "Talento" de la navbar ---------------- */
   function syncHeroTextAlign() {
-    var talentoLink = mainNav.querySelector('a[href="#talento"]');
+    var talentoLink = mainNav.querySelector('a[href="/talento/"]') || mainNav.querySelector('a[href="#talento"]');
     if (!talentoLink || window.innerWidth <= 780) {
       document.documentElement.style.removeProperty("--hero-align-left");
       return;
@@ -191,7 +264,7 @@
     var item = document.createElement("div");
     item.className = "client-logo";
     var img = document.createElement("img");
-    img.src = "assets/images/clients/" + logo[0];
+    img.src = "/assets/images/clients/" + logo[0];
     img.alt = logo[1];
     img.loading = "lazy";
     item.appendChild(img);

@@ -10,6 +10,8 @@
   var STORAGE_KEY = "dp-lang";
   var DEFAULT_LANG = "es";
   var HTML_LANG = { es: "es", ca: "ca", en: "en" };
+  var SECTION_SLUGS = ["somos", "talento", "aportamos", "clientes", "contacto"];
+  var SITE_ORIGIN = "https://www.dataplanning.es";
 
   var STRINGS = {
     es: {
@@ -18,7 +20,29 @@
         description: "Dataplanning es una agencia de medios independiente en Barcelona. Desde 2001 aportamos soluciones integrales de comunicación con un enfoque estratégico y altamente personalizado. Pure Accuracy.",
         keywords: "agencia de medios, agencia de medios Barcelona, planificación de medios, comunicación, publicidad, Dataplanning",
         ogTitle: "Dataplanning · Agencia de medios en Barcelona · Pure Accuracy",
-        ogDescription: "Mucho más que una agencia de medios. Personas que marcan la diferencia. 25 años conectando marcas y audiencias."
+        ogDescription: "Mucho más que una agencia de medios. Personas que marcan la diferencia. 25 años conectando marcas y audiencias.",
+        sections: {
+          somos: {
+            title: "Somos · Dataplanning",
+            description: "Mucho más que una agencia de medios. Agencia independiente en Barcelona desde 2001. Soluciones integrales de comunicación. Pure Accuracy."
+          },
+          talento: {
+            title: "Talento · Dataplanning",
+            description: "Personas que marcan la diferencia. El equipo de Dataplanning, agencia de medios en Barcelona especializada en estrategia y planificación."
+          },
+          aportamos: {
+            title: "Aportamos · Dataplanning",
+            description: "La fuerza de la experiencia. Estrategia de medios crossmedia para conectar marcas con una audiencia fragmentada y multiplataforma."
+          },
+          clientes: {
+            title: "Clientes · Dataplanning",
+            description: "Marcas que crecen junto a nosotros. Más de 80 clientes confían en Dataplanning para evolucionar y descubrir nuevas oportunidades."
+          },
+          contacto: {
+            title: "Contacto · Dataplanning",
+            description: "Contacta con Dataplanning. Beethoven 15, 08021 Barcelona. Teléfono +34 93 241 19 98. hola@dataplanning.es."
+          }
+        }
       },
       skip: "Saltar al contenido",
       lang: { label: "Idioma" },
@@ -104,7 +128,29 @@
         description: "Dataplanning és una agència de mitjans independent a Barcelona. Des del 2001 aportem solucions integrals de comunicació amb un enfocament estratègic i altament personalitzat. Pure Accuracy.",
         keywords: "agència de mitjans, agència de mitjans Barcelona, planificació de mitjans, comunicació, publicitat, Dataplanning",
         ogTitle: "Dataplanning · Agència de mitjans a Barcelona · Pure Accuracy",
-        ogDescription: "Molt més que una agència de mitjans. Persones que marquen la diferència. 25 anys connectant marques i audiències."
+        ogDescription: "Molt més que una agència de mitjans. Persones que marquen la diferència. 25 anys connectant marques i audiències.",
+        sections: {
+          somos: {
+            title: "Som · Dataplanning",
+            description: "Molt més que una agència de mitjans. Agència independent a Barcelona des del 2001. Solucions integrals de comunicació. Pure Accuracy."
+          },
+          talento: {
+            title: "Talent · Dataplanning",
+            description: "Persones que marquen la diferència. L’equip de Dataplanning, agència de mitjans a Barcelona especialitzada en estratègia i planificació."
+          },
+          aportamos: {
+            title: "Aportem · Dataplanning",
+            description: "La força de l’experiència. Estratègia de mitjans crossmedia per connectar marques amb una audiència fragmentada i multiplataforma."
+          },
+          clientes: {
+            title: "Clients · Dataplanning",
+            description: "Marques que creixem amb nosaltres. Més de 80 clients confien en Dataplanning per continuar evolucionant i descobrir noves oportunitats."
+          },
+          contacto: {
+            title: "Contacte · Dataplanning",
+            description: "Contacta amb Dataplanning. Beethoven 15, 08021 Barcelona. Telèfon +34 93 241 19 98. hola@dataplanning.es."
+          }
+        }
       },
       skip: "Salta al contingut",
       lang: { label: "Idioma" },
@@ -250,6 +296,35 @@
     } catch (e2) { /* ignore */ }
   }
 
+  function currentSection() {
+    try {
+      var slug = window.location.pathname.replace(/^\/+|\/+$/g, "");
+      return SECTION_SLUGS.indexOf(slug) !== -1 ? slug : "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function setMetaContent(selector, value) {
+    var el = document.querySelector(selector);
+    if (el && value) el.setAttribute("content", value);
+  }
+
+  function applySeo() {
+    var section = currentSection();
+    var title = section ? t("meta.sections." + section + ".title") : t("meta.title");
+    var description = section ? t("meta.sections." + section + ".description") : t("meta.description");
+    var canonical = SITE_ORIGIN + (section ? "/" + section + "/" : "/");
+    document.title = title;
+    setMetaContent('meta[name="description"]', description);
+    setMetaContent('meta[property="og:title"]', section ? title : t("meta.ogTitle"));
+    setMetaContent('meta[property="og:description"]', section ? description : t("meta.ogDescription"));
+    setMetaContent('meta[property="og:url"]', canonical);
+    var link = document.querySelector('link[rel="canonical"]');
+    if (link) link.setAttribute("href", canonical);
+    document.documentElement.setAttribute("data-section", section || "");
+  }
+
   function applyDom() {
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       el.textContent = t(el.getAttribute("data-i18n"));
@@ -280,8 +355,8 @@
     if (!isEnabled(lang)) lang = DEFAULT_LANG;
     currentLang = lang;
     document.documentElement.lang = HTML_LANG[lang] || lang;
-    document.title = t("meta.title");
     applyDom();
+    applySeo();
     updateSwitcher();
     if (persist !== false) persistLang(lang);
     changeListeners.forEach(function (fn) {
@@ -308,6 +383,9 @@
   window.DP_I18N = {
     t: t,
     applyLang: applyLang,
+    applySeo: applySeo,
+    currentSection: currentSection,
+    SECTION_SLUGS: SECTION_SLUGS,
     getLang: function () { return currentLang; },
     onChange: onChange,
     ENABLED_LANGS: ENABLED_LANGS
