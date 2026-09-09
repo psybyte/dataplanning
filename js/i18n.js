@@ -66,7 +66,10 @@
       },
       aportamos: {
         title1: "La fuerza",
-        title2: "de la experiencia"
+        title2: "de la experiencia",
+        p1: "En este apasionante, complejo y cambiante mundo de la comunicación, aportamos la visión global necesaria en la estrategia de medios para la consecución de los objetivos.",
+        p2: "Nos sumergimos en una atmósfera de pensamiento global para desarrollar la mejor estrategia crossmedia para <strong>conectar</strong> de manera eficaz <strong>con</strong> una audiencia fragmentada, multiplataforma y dispersa ante los impactos publicitarios.",
+        p3: "Combinamos el conocimiento del ecosistema tradicional con una visión digital para transformar la complejidad en nuevas oportunidades de crecimiento."
       },
       clientes: {
         title1: "Marcas que crecen",
@@ -98,7 +101,7 @@
     ca: {
       meta: {
         title: "Dataplanning · Agència de mitjans a Barcelona · Pure Accuracy",
-        description: "Dataplanning és una agència de mitjans independents a Barcelona. Des del 2001 aportem solucions integrals de comunicació amb un enfocament estratègic i altament personalitzat. Pure Accuracy.",
+        description: "Dataplanning és una agència de mitjans independent a Barcelona. Des del 2001 aportem solucions integrals de comunicació amb un enfocament estratègic i altament personalitzat. Pure Accuracy.",
         keywords: "agència de mitjans, agència de mitjans Barcelona, planificació de mitjans, comunicació, publicitat, Dataplanning",
         ogTitle: "Dataplanning · Agència de mitjans a Barcelona · Pure Accuracy",
         ogDescription: "Molt més que una agència de mitjans. Persones que marquen la diferència. 25 anys connectant marques i audiències."
@@ -133,9 +136,9 @@
       somos: {
         title1: "Molt més",
         title2: "que una agència de mitjans",
-        p1: "Som una agència de mitjans independents que aportem solucions integrals de comunicació amb un enfocament estratègic i altament personalitzat.",
+        p1: "Som una agència de mitjans independent que aportem solucions integrals de comunicació amb un enfocament estratègic i altament personalitzat.",
         p2: "Des de la nostra arribada a Barcelona l'any 2001, el nostre eslògan sintetitza la nostra raó de ser: <strong>PURE ACCURACY</strong>.",
-        p3: "Creiem en una forma de treballar propera, proactiva i honesta, en què cada client se sent escoltat, entès i cuidat.",
+        p3: "Creiem en una forma de treballar propera, proactiva i honesta, en que cada client se sent escoltat, entès i cuidat.",
         p4: "El nostre compromís és oferir sempre un servei excel·lent i totalment personalitzat, adaptant-nos a cada necessitat, projecte i pressupost. Aportant valor real i tangible al procés de construcció i creixement dels nostres clients."
       },
       talento: {
@@ -149,7 +152,10 @@
       },
       aportamos: {
         title1: "La força",
-        title2: "de l’experiència"
+        title2: "de l’experiència",
+        p1: "En aquest apassionant, complex i canviant món de la comunicació, aportem la visió global necessària en l'estratègia de mitjans per a la consecució dels objectius.",
+        p2: "Ens submergim en una atmosfera de pensament global per desenvolupar la millor estratègia crossmedia per <strong>connectar</strong> de manera eficaç <strong>amb</strong> una audiència fragmentada, multiplataforma i dispersa davant els impactes publicitaris.",
+        p3: "Combinem el coneixement de l’ecosistema tradicional amb una visió digital per transformar la complexitat en noves oportunitats de creixement."
       },
       clientes: {
         title1: "Marques que creixem",
