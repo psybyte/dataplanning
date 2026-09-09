@@ -3,6 +3,10 @@
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
+  function t(key, vars) {
+    return window.DP_I18N ? window.DP_I18N.t(key, vars) : key;
+  }
+
   /* ---------------- Header: solid background on scroll ---------------- */
   var header = document.getElementById("site-header");
   function onScroll() {
@@ -18,17 +22,25 @@
   /* ---------------- Mobile nav toggle ---------------- */
   var navToggle = document.getElementById("nav-toggle");
   var mainNav = document.getElementById("main-nav");
+
+  function setNavToggleLabel() {
+    var isOpen = mainNav.classList.contains("is-open");
+    navToggle.setAttribute("aria-label", t(isOpen ? "nav.close" : "nav.open"));
+  }
+
   navToggle.addEventListener("click", function () {
     var isOpen = mainNav.classList.toggle("is-open");
     navToggle.setAttribute("aria-expanded", String(isOpen));
-    navToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+    setNavToggleLabel();
   });
   mainNav.querySelectorAll("a").forEach(function (link) {
     link.addEventListener("click", function () {
       mainNav.classList.remove("is-open");
       navToggle.setAttribute("aria-expanded", "false");
+      setNavToggleLabel();
     });
   });
+  setNavToggleLabel();
 
   /* ---------------- Hero slider ---------------- */
   var slides = Array.prototype.slice.call(document.querySelectorAll(".hero-slide"));
@@ -39,7 +51,7 @@
   slides.forEach(function (_, i) {
     var dot = document.createElement("button");
     dot.setAttribute("role", "tab");
-    dot.setAttribute("aria-label", "Ir a la diapositiva " + (i + 1));
+    dot.setAttribute("aria-label", t("hero.goToSlide", { n: i + 1 }));
     if (i === 0) dot.classList.add("is-active");
     dot.addEventListener("click", function () {
       goToSlide(i);
@@ -48,6 +60,12 @@
     dotsWrap.appendChild(dot);
   });
   var dots = Array.prototype.slice.call(dotsWrap.children);
+
+  function refreshHeroDotLabels() {
+    dots.forEach(function (dot, i) {
+      dot.setAttribute("aria-label", t("hero.goToSlide", { n: i + 1 }));
+    });
+  }
 
   function goToSlide(index) {
     slides[currentSlide].classList.remove("is-active");
@@ -233,7 +251,7 @@
   var cvInput = document.getElementById("cv");
   var cvName = document.getElementById("file-input-name");
   cvInput.addEventListener("change", function () {
-    cvName.textContent = cvInput.files.length ? cvInput.files[0].name : "Ningún archivo seleccionado";
+    cvName.textContent = cvInput.files.length ? cvInput.files[0].name : t("contacto.noFile");
   });
 
   var form = document.getElementById("contacto-form");
@@ -246,7 +264,7 @@
 
     var submitBtn = form.querySelector(".btn-submit");
     submitBtn.disabled = true;
-    feedback.textContent = "Enviando…";
+    feedback.textContent = t("contacto.sending");
     feedback.className = "form-feedback";
 
     fetch(form.action, {
@@ -257,16 +275,16 @@
       .then(function (res) { return res.json().catch(function () { return { ok: res.ok }; }); })
       .then(function (data) {
         if (data && data.ok) {
-          feedback.textContent = "¡Gracias! Hemos recibido tu mensaje y te responderemos lo antes posible.";
+          feedback.textContent = t("contacto.success");
           feedback.className = "form-feedback is-success";
           form.reset();
-          cvName.textContent = "Ningún archivo seleccionado";
+          cvName.textContent = t("contacto.noFile");
         } else {
           throw new Error((data && data.error) || "Error desconocido");
         }
       })
       .catch(function () {
-        feedback.textContent = "No se ha podido enviar el mensaje. Prueba de nuevo o escríbenos a hola@dataplanning.es.";
+        feedback.textContent = t("contacto.error");
         feedback.className = "form-feedback is-error";
       })
       .finally(function () {
@@ -309,6 +327,7 @@
     } else if (navToggle) {
       nodes.push(navToggle);
     }
+    Array.prototype.push.apply(nodes, header.querySelectorAll(".lang-switch button:not([hidden])"));
     var pad = 8;
     var rects = [];
     for (var i = 0; i < nodes.length; i++) {
@@ -481,4 +500,24 @@
     document.fonts.ready.then(requestNavCollisionCheck);
   }
   requestNavCollisionCheck();
+
+  if (window.DP_I18N) {
+    window.DP_I18N.onChange(function () {
+      setNavToggleLabel();
+      refreshHeroDotLabels();
+      if (cvInput && cvName) {
+        cvName.textContent = cvInput.files.length ? cvInput.files[0].name : t("contacto.noFile");
+      }
+      if (feedback && !feedback.classList.contains("is-success") && !feedback.classList.contains("is-error")) {
+        feedback.textContent = "";
+      } else if (feedback && feedback.classList.contains("is-success")) {
+        feedback.textContent = t("contacto.success");
+      } else if (feedback && feedback.classList.contains("is-error")) {
+        feedback.textContent = t("contacto.error");
+      }
+      syncHeroTextAlign();
+      collectNavCollisionTargets();
+      requestNavCollisionCheck();
+    });
+  }
 })();

@@ -225,6 +225,73 @@ input, textarea { font-family: inherit; }
 .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.lang-switch button {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: clamp(0.72rem, 1vw, 0.9rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 0 0 4px;
+  position: relative;
+  line-height: 1;
+}
+
+.lang-switch button::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 2px;
+  background: var(--cyan);
+  transition: width 0.25s ease;
+}
+
+.lang-switch button:hover::after,
+.lang-switch button:focus-visible::after,
+.lang-switch button.is-active::after,
+.lang-switch button[aria-pressed="true"]::after { width: 100%; }
+
+.lang-switch button.is-active,
+.lang-switch button[aria-pressed="true"] {
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.lang-sep {
+  color: var(--white);
+  opacity: 0.7;
+  font-size: clamp(0.72rem, 1vw, 0.9rem);
+  line-height: 1;
+  pointer-events: none;
+}
+
+@media (min-width: 781px) {
+  .site-header .container {
+    /* Extra gutter for ESP-CAT; at 1920px the 12rem cap keeps the PDF alignment */
+    padding-right: clamp(6.5rem, calc(10vw + 2.5rem), 12rem);
+  }
+  .header-tools {
+    position: absolute;
+    right: clamp(0.85rem, 1.8vw, 1.75rem);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 101;
+  }
+}
+
 /* Línea de contenido que choca con logo o textos del navbar */
 .is-nav-occluded {
   opacity: 0 !important;
@@ -909,6 +976,9 @@ section {
   .main-nav li { margin-left: 0 !important; }
   .main-nav a { font-size: 1.1rem; }
   .nav-toggle { display: flex; z-index: 101; }
+  .header-tools { z-index: 101; }
+  .lang-switch button,
+  .lang-sep { font-size: 0.8rem; }
 
   .hero-slide {
     align-items: flex-start;
