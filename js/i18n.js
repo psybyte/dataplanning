@@ -97,7 +97,6 @@
         },
         pedro: {
           bio: [
-            "Licenciado en Publicidad y RRPP (Udg)",
             "Comunicación Audiovisual (UOC)",
             "Máster en publicidad digital (Seeway)",
             "21 años de experiencia.",
