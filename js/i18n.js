@@ -96,6 +96,7 @@
           ]
         },
         pedro: {
+          role: "Director Expansión y Planificación",
           bio: [
             "Comunicación Audiovisual (UOC)",
             "Máster en publicidad digital (Seeway)",
@@ -220,6 +221,7 @@
           ]
         },
         pedro: {
+          role: "Director d'Expansió i Planificació",
           bio: [
             "Llicenciat en Comunicació Audiovisual (UOC)",
             "Màster en publicitat digital (Seeway)",
