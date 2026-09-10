@@ -86,7 +86,24 @@
         p2: "Unimos experiencia, especialización y una curiosidad constante por entender cómo evolucionan las marcas, los consumidores y los medios.",
         p3: "La pasión por nuestro trabajo y la vocación de servicio están en nuestro ADN para satisfacer a los clientes más exigentes.",
         prev: "Persona anterior",
-        next: "Siguiente persona"
+        next: "Siguiente persona",
+        albert: {
+          bio: [
+            "Licenciado en Publicidad y RRPP (UAB)",
+            "Máster en comunicación digital (INITEC)",
+            "31 años de experiencia.",
+            "“Diploma IA aplicada a la planificación de medios” (Imagina)"
+          ]
+        },
+        pedro: {
+          bio: [
+            "Licenciado en Publicidad y RRPP (Udg)",
+            "Comunicación Audiovisual (UOC)",
+            "Máster en publicidad digital (Seeway)",
+            "21 años de experiencia.",
+            "“Diploma IA aplicada a la planificación de medios” (Imagina)"
+          ]
+        }
       },
       aportamos: {
         title1: "La fuerza",
@@ -194,7 +211,24 @@
         p2: "Unim experiència, especialització i una curiositat constant per entendre com evolucionen les marques, els consumidors i els mitjans.",
         p3: "La passió pel nostre treball i la vocació de servei són dins el nostre ADN per satisfer els clients més exigents.",
         prev: "Persona anterior",
-        next: "Persona següent"
+        next: "Persona següent",
+        albert: {
+          bio: [
+            "Llicenciat en Publicitat i RRPP (UAB)",
+            "Màster en comunicació digital (INITEC)",
+            "31 anys d'experiència.",
+            "“Diploma IA aplicada a la planificació de mitjans” (Imagina)"
+          ]
+        },
+        pedro: {
+          bio: [
+            "Llicenciat en Publicitat i RRPP (Udg)",
+            "Llicenciat en Comunicació Audiovisual (UOC)",
+            "Màster en publicitat digital (Seeway)",
+            "21 anys d'experiència.",
+            "“Diploma IA aplicada a la planificació de mitjans” (Imagina)"
+          ]
+        }
       },
       aportamos: {
         title1: "La força",
@@ -260,6 +294,20 @@
       });
     }
     return val;
+  }
+
+  function tList(key) {
+    var val = lookup(STRINGS[currentLang], key);
+    if (!Array.isArray(val) || !val.length) val = lookup(STRINGS[DEFAULT_LANG], key);
+    return Array.isArray(val) ? val : [];
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
   }
 
   function isEnabled(lang) {
@@ -340,6 +388,14 @@
         var key = parts.slice(1).join(":").trim();
         if (attr && key) el.setAttribute(attr, t(key));
       });
+    });
+    document.querySelectorAll("[data-i18n-list]").forEach(function (el) {
+      var items = tList(el.getAttribute("data-i18n-list"));
+      if (!items.length) return;
+      el.innerHTML = items.map(function (text) {
+        var cls = /Diploma/.test(text) ? ' class="team-bio-diploma"' : "";
+        return "<li" + cls + ">" + escapeHtml(text) + "</li>";
+      }).join("");
     });
   }
 
